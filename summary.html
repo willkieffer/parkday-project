@@ -4,14 +4,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="index.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="index.js" type="text/babel"></script>
     <title>Summary of Meals Prepared</title>
 </head>
 
 <body>
-    <h1>This is a test email that contains a link to a summary of the meals due to be delievered on 3/24.</h1>
-    <button onclick="">View your summary!</button>
+    <h1>Thanks for using Parkday! Here is a summary of your meals for 3/24.</h1>
+
+
+    <div id="mydiv"></div>
+
+    <script type="text/babel">
+      function Hello() {
+        return <h1>Hello World!</h1>;
+      }
+
+      ReactDOM.render(<App />, document.getElementById('mydiv'))
+    </script>
+    
 </body>
 
 </html>

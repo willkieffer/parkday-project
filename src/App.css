@@ -1,0 +1,23 @@
+.App {
+  text-align: center;
+  position: relative;
+}
+
+.Contact {
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  padding: 4%;
+  font-size: small;
+  width: 92%;
+}
+
+.MenuItem {
+  background-color: aliceblue;
+  padding: 1%;
+  margin: 2%;
+}
+
+.MenuItem:hover {
+  background-color: rgb(232, 243, 253);
+}
