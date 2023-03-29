@@ -9,7 +9,7 @@ function Menus({ data }) {
     });
     if (location === -1) {
       location = menus.push(
-        <MenuTable menu_name={item.menu_name} items={[item]} />
+        <MenuTable menu_name={item.menu_name} service_date={item.service_date} items={[item]} />
       ) - 1;
     } else {
       menus[location].props.items.push(item);
@@ -18,42 +18,80 @@ function Menus({ data }) {
 
   return (
     <div className="App">
-      <Contact />
+      <div className='Logo'>
+        <a href="https://heyparkday.com/" >
+          <img src="https://uploads-ssl.webflow.com/631e34a7c664e87aa16a0816/631e46f926ebf976ee3e3b85_Parkday%20Logo%20SVG.svg"></img>
+        </a>
+      </div>
       {menus}
+      <Contact />
     </div>
   );
 }
 
-function MenuTable({ menu_name, items }) {
+function MenuTable({ menu_name, service_date, items }) {
+  let quantities = [];
   let rows = [];
+
   items.forEach((item) => {
     //to make sure only the already-created orders are shown
-    if(new Date(item.meal_opt_in_created_date) <= Date.now()) {
-      rows.push(
-        <MenuItem item_name={item.name} ingredients_array={item.ingredients_array} />
-      );  
+    if (new Date(item.meal_opt_in_created_date) <= Date.now()) {
+      let location = rows.findIndex((x) => {
+        return x.props.item_name === item.name;
+      });
+      if (location === -1) {
+        quantities.push(1);
+        rows.push(
+          <MenuItem item_name={item.name} />
+        );
+      } else {
+        quantities[location] = quantities[location] + 1;
+      }
     }
   });
 
+  rows = [];
+
+  items.forEach((item) => {
+    //to make sure only the already-created orders are shown
+    if (new Date(item.meal_opt_in_created_date) <= Date.now()) {
+      let location = rows.findIndex((x) => {
+        return x.props.item_name === item.name;
+      });
+      if (location === -1) {
+        rows.push(
+          <MenuItem item_name={item.name} ingredients_array={item.ingredients_array} quantity={quantities[rows.length]} />
+        );
+      }
+    }
+  });
+
+
   return (
     <div>
-      <h1>{menu_name}</h1>
-      {rows}
+      <div className='MenuTitle'>
+        <h1>{menu_name}</h1>
+        <h2>{service_date}</h2>
+      </div>
+      <div className='MenuSpace'>
+        {rows}
+      </div>
     </div>
   );
 }
 
-function MenuItem({ item_name, ingredients_array }) {
+function MenuItem({ item_name, ingredients_array, quantity }) {
   return (
     <div className='MenuItem'>
-      <p>{item_name}</p>
+      <h3>{item_name} ({quantity} total)</h3>
       <ItemIngredients ingredients_array={ingredients_array} />
     </div>
   );
 }
 
-
 function ItemIngredients({ ingredients_array }) {
+  ingredients_array = ingredients_array.substring(1, ingredients_array.length - 1);
+
   return (
     <div>
       <p>Ingredients:</p>
@@ -62,23 +100,18 @@ function ItemIngredients({ ingredients_array }) {
   );
 }
 
-
 function Contact() {
   return (
     <div className='Contact'>
       <h1>See something wrong? Delivery late? Let us know!</h1>
-      <button>Contact Us</button>
+      <button onClick={()=> window.location = 'mailto:order@heyparkday.com?subject=Problem With My Order'} className='ContactButton'>Contact Us</button>
     </div>
   );
 }
 
-
-
 function App() {
   return <Menus data={RESPONSE} />;
 }
-
-
 
 export default App;
 

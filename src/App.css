@@ -1,23 +1,81 @@
 .App {
   text-align: center;
-  position: relative;
+  margin: 0;
+  font-family: proxima-nova, sans-serif;
 }
 
 .Contact {
-  position: fixed;
-  bottom: 0;
-  background-color: white;
-  padding: 4%;
   font-size: small;
-  width: 92%;
+  background-color: #b7e2ef;
+  border-top-left-radius: 100%;
+  border-top-right-radius: 100%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.ContactButton {
+  overflow: hidden;
+  padding: 20px 32px;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  border-radius: 200px;
+  background-color: #fbf7e2;
+  transition: background-color 500ms ease;
+  color: #000;
+  text-decoration: none;
+  font-size: 18px;
+  border: none;
+  margin: 30px;
+  letter-spacing: -0.02em;
+}
+
+.ContactButton:hover {
+  background-color: black;
+  color: white;
 }
 
 .MenuItem {
-  background-color: aliceblue;
-  padding: 1%;
   margin: 2%;
+  overflow: hidden;
+  padding: 4.5em;
+  border-radius: 28px;
+  border: 3px solid #000;
+  background-color: #fcedd5;
+  box-shadow: 11px 11px 0 0 #000;
 }
 
-.MenuItem:hover {
-  background-color: rgb(232, 243, 253);
+h1 {
+  font-weight: 700;
+  margin: 0;
+}
+
+.MenuSpace {
+  background-color: white;
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.MenuTitle {
+  background-color: #b7e2ef;
+  border-bottom-left-radius: 100%;
+  border-bottom-right-radius: 100%;
+  font-size: 30px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  font-family: 'Paytone One', sans-serif;
+}
+
+.Logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+img {
+  height: 20px;
+  padding-top: 50px;
+  padding-left: 30px;
 }
