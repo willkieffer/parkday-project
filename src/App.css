@@ -9,7 +9,7 @@
   background-color: #b7e2ef;
   border-top-left-radius: 100%;
   border-top-right-radius: 100%;
-  padding-top: 100px;
+  padding-top: 150px;
   padding-bottom: 100px;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .MenuItem {
-  margin: 2%;
+  margin: 30px;
   overflow: hidden;
   padding: 4.5em;
   border-radius: 28px;

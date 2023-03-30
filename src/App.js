@@ -1,7 +1,16 @@
 import './App.css';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  useLocation
+} from "react-router-dom";
 
 function Menus({ data }) {
+  let query = useQuery();
   const menus = [];
+
+  //This is the URL param service id
+  const service_id = query.get("serviceid");
 
   data.forEach((item) => {
     let location = menus.findIndex((x) => {
@@ -9,7 +18,7 @@ function Menus({ data }) {
     });
     if (location === -1) {
       location = menus.push(
-        <MenuTable menu_name={item.menu_name} service_date={item.service_date} items={[item]} />
+        <MenuTable key={item.menu_name} menu_name={item.menu_name} service_date={item.service_date} items={[item]} />
       ) - 1;
     } else {
       menus[location].props.items.push(item);
@@ -20,7 +29,7 @@ function Menus({ data }) {
     <div className="App">
       <div className='Logo'>
         <a href="https://heyparkday.com/" >
-          <img src="https://uploads-ssl.webflow.com/631e34a7c664e87aa16a0816/631e46f926ebf976ee3e3b85_Parkday%20Logo%20SVG.svg"></img>
+          <img src="https://uploads-ssl.webflow.com/631e34a7c664e87aa16a0816/631e46f926ebf976ee3e3b85_Parkday%20Logo%20SVG.svg" alt='logo'></img>
         </a>
       </div>
       {menus}
@@ -42,7 +51,7 @@ function MenuTable({ menu_name, service_date, items }) {
       if (location === -1) {
         quantities.push(1);
         rows.push(
-          <MenuItem item_name={item.name} />
+          <MenuItem key={item.name} item_name={item.name} />
         );
       } else {
         quantities[location] = quantities[location] + 1;
@@ -60,7 +69,7 @@ function MenuTable({ menu_name, service_date, items }) {
       });
       if (location === -1) {
         rows.push(
-          <MenuItem item_name={item.name} ingredients_array={item.ingredients_array} quantity={quantities[rows.length]} />
+          <MenuItem key={item.name} item_name={item.name} ingredients_array={item.ingredients_array} quantity={quantities[rows.length]} />
         );
       }
     }
@@ -104,13 +113,23 @@ function Contact() {
   return (
     <div className='Contact'>
       <h1>See something wrong? Delivery late? Let us know!</h1>
-      <button onClick={()=> window.location = 'mailto:order@heyparkday.com?subject=Problem With My Order'} className='ContactButton'>Contact Us</button>
+      <button onClick={() => window.location = 'mailto:order@heyparkday.com?subject=Problem With My Order'} className='ContactButton'>Contact Us</button>
     </div>
   );
 }
 
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 function App() {
-  return <Menus data={RESPONSE} />;
+  return (
+    <Router>
+      <Menus data={RESPONSE} />
+    </Router>
+  );
 }
 
 export default App;
